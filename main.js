@@ -53,7 +53,7 @@ var transporter = nodemailer.createTransport({
 
 
 for( let i in receivingEmails ) {
-	if( receivingEmails.length < 1) continue;
+	if( receivingEmails[i].length < 1) continue;
 	var memberDetails = receivingEmails[i].split(':');
 	var membersName = memberDetails[0];
 	var membersEmail = memberDetails[1];
