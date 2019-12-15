@@ -49,8 +49,6 @@ var mailOptions = {
 	}]
 };
 
-/*
-
 transporter.sendMail( mailOptions, function(error, info) {
 	if( error) {
 		console.log( error );
@@ -60,4 +58,4 @@ transporter.sendMail( mailOptions, function(error, info) {
 	}
 });
 
-*/
+
