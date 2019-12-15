@@ -7,9 +7,9 @@ const fs = require('fs');
 var sendingEmail = process.env.EMAIL;
 var sendingEmailPassword = process.env.PASSWORD;
 var mailingServer = process.env.MAILSERVER;
+var name = process.env.NAME;
 var receivingEmails = "wisdomnji@gmail.com"; //TODO: Move this to a file read into a map <name:email>
 var mailSubject = "Learning NodejsMailer"; //TODO: Pass this as argument
-var text = "Hello world"; //TODO: Move this to a file read into an an array
 
 var html = fs.readFileSync('devfest/devfest-email/index.html').toString();
 
@@ -18,9 +18,10 @@ console.log(sendingEmailPassword);
 console.log(mailingServer);
 console.log(receivingEmails);
 console.log(mailSubject);
+console.log(name);
 
 var transporter = nodemailer.createTransport({
-	host: 'smtp.gmail.com',
+	host: mailingServer,
 	debug : true,
 	port : 465,
 	secure : true,
@@ -32,7 +33,7 @@ var transporter = nodemailer.createTransport({
 
 
 var mailOptions = {
-	from : `"GDG Bambili" <${sendingEmail}>`,
+	from : `"${name}" <${sendingEmail}>`,
 	to : receivingEmails,
 	subject : mailSubject,
 	html : html,
