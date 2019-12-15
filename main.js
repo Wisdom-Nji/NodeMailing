@@ -8,10 +8,30 @@ var sendingEmail = process.env.EMAIL;
 var sendingEmailPassword = process.env.PASSWORD;
 var mailingServer = process.env.MAILSERVER;
 var name = process.env.NAME;
-var receivingEmails = "wisdomnji@gmail.com"; //TODO: Move this to a file read into a map <name:email>
-var mailSubject = "Learning NodejsMailer"; //TODO: Pass this as argument
+var receivingEmails = ""; //TODO: Move this to a file read into a map <name:email>
+var mailSubject = ""; //TODO: Pass this as argument
 
-var html = fs.readFileSync('devfest/devfest-email/index.html').toString();
+//Read args
+for( let i=0;i<process.argv.length;++i ) {
+	let arg = process.argv[i];
+	if(arg == "--subject" ) {
+		mailSubject = process.argv[i+1];
+		++i;
+	}
+
+	else if( arg == "--mailing_list") {
+		receivingEmails = fs.readFileSync( process.argv[i+1] ).toString();
+		receivingEmails.split('\n');
+		++i;
+	}
+}
+
+//TODO: put some checks here before proceeding
+
+var html = fs.readFileSync('devfest/devfest-email/index.html').toString(); //TODO: change this to file, so any HTML template can be dynamically added and changed
+
+//custom code
+//html.replace("_____members_name_goes_here_____", membersName);
 
 console.log(sendingEmail);
 console.log(sendingEmailPassword);
@@ -49,6 +69,8 @@ var mailOptions = {
 	}]
 };
 
+
+/*
 transporter.sendMail( mailOptions, function(error, info) {
 	if( error) {
 		console.log( error );
@@ -58,4 +80,4 @@ transporter.sendMail( mailOptions, function(error, info) {
 	}
 });
 
-
+*/
