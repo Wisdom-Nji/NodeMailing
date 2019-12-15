@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 const path = "credentials.env";
-require('dotenv').config({path: path.toString()})
+require('dotenv').config({ path: path.toString() })
 
 var sendingEmail = process.env.EMAIL;
 var sendingEmailPassword = process.env.PASSWORD;
@@ -9,9 +9,17 @@ var receivingEmails = "wisdomnji@gmail.com"; //TODO: Move this to a file read in
 var mailSubject = "Learning NodejsMailer"; //TODO: Pass this as argument
 var text = "Hello world"; //TODO: Move this to a file read into an an array
 
+console.log(sendingEmail);
+console.log(sendingEmailPassword);
+console.log(mailingServer);
+console.log(receivingEmails);
+console.log(mailSubject);
 
 var transporter = nodemailer.createTransport({
-	server: mailingServer,
+	host: 'smtp.gmail.com',
+	debug : true,
+	port : 465,
+	secure : true,
 	auth: {
 		user : sendingEmail,
 		pass : sendingEmailPassword
