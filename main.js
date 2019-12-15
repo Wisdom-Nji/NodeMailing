@@ -63,7 +63,6 @@ for( let i in receivingEmails ) {
 	console.log("=> Sending Email to=> %s:%s", membersName, membersEmail);
 
 	html = html.replace("_____members_name_goes_here_____", membersName);
-	console.log(html);
 	var mailOptions = {
 		from : `"${name}" <${sendingEmail}>`,
 		to : membersEmail,
