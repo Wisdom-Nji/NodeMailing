@@ -80,7 +80,7 @@ for( let i in receivingEmails ) {
 		}]
 	};
 
-	/*
+	///*
 	transporter.sendMail( mailOptions, function(error, info) {
 		if( error) {
 			console.log( error );
@@ -89,6 +89,6 @@ for( let i in receivingEmails ) {
 			console.log("Email sent: " + info.response);
 		}
 	});
-	*/
+	//*/
 
 }
