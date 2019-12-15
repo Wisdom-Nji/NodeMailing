@@ -1,6 +1,8 @@
 const nodemailer = require('nodemailer');
 const path = "credentials.env";
 require('dotenv').config({ path: path.toString() })
+const fs = require('fs');
+
 
 var sendingEmail = process.env.EMAIL;
 var sendingEmailPassword = process.env.PASSWORD;
@@ -8,6 +10,9 @@ var mailingServer = process.env.MAILSERVER;
 var receivingEmails = "wisdomnji@gmail.com"; //TODO: Move this to a file read into a map <name:email>
 var mailSubject = "Learning NodejsMailer"; //TODO: Pass this as argument
 var text = "Hello world"; //TODO: Move this to a file read into an an array
+
+var html = fs.readFileSync('devfest/devfest-email/index.html').toString();
+console.log( html );
 
 console.log(sendingEmail);
 console.log(sendingEmailPassword);
@@ -28,11 +33,23 @@ var transporter = nodemailer.createTransport({
 
 
 var mailOptions = {
-	from : sendingEmail,
+	from : "GDG Bambili",
 	to : receivingEmails,
 	subject : mailSubject,
-	text : text
+	html : html,
+	attachments : [{
+		filename : 'devfest19.png',
+		path : 'devfest/devfest-email/images',
+		cid : sendingEmail + "_devfest19.png"
+	},
+	{
+		filename : 'gdc.png',
+		path : 'devfest/devfest-email/images',
+		cid : sendingEmail + "_gdc.png"
+	}]
 };
+
+/*
 
 transporter.sendMail( mailOptions, function(error, info) {
 	if( error) {
@@ -42,3 +59,5 @@ transporter.sendMail( mailOptions, function(error, info) {
 		console.log("Email sent: " + info.response);
 	}
 });
+
+*/
