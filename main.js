@@ -12,7 +12,6 @@ var mailSubject = "Learning NodejsMailer"; //TODO: Pass this as argument
 var text = "Hello world"; //TODO: Move this to a file read into an an array
 
 var html = fs.readFileSync('devfest/devfest-email/index.html').toString();
-console.log( html );
 
 console.log(sendingEmail);
 console.log(sendingEmailPassword);
@@ -33,18 +32,18 @@ var transporter = nodemailer.createTransport({
 
 
 var mailOptions = {
-	from : "GDG Bambili",
+	from : `"GDG Bambili" <${sendingEmail}>`,
 	to : receivingEmails,
 	subject : mailSubject,
 	html : html,
 	attachments : [{
 		filename : 'devfest19.png',
-		path : 'devfest/devfest-email/images',
+		path : 'devfest/devfest-email/images/devfest19.png',
 		cid : sendingEmail + "_devfest19.png"
 	},
 	{
 		filename : 'gdc.png',
-		path : 'devfest/devfest-email/images',
+		path : 'devfest/devfest-email/images/gdc.png',
 		cid : sendingEmail + "_gdc.png"
 	}]
 };
