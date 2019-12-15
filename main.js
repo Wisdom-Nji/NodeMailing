@@ -54,20 +54,20 @@ var transporter = nodemailer.createTransport({
 
 for( let i in receivingEmails ) {
 	if( receivingEmails[i].length < 1) continue;
-	var memberDetails = receivingEmails[i].split(':');
-	var membersName = memberDetails[0];
-	var membersEmail = memberDetails[1];
+	let memberDetails = receivingEmails[i].split(':');
+	let membersName = memberDetails[0];
+	let membersEmail = memberDetails[1];
 	
 	if( membersEmail.length < 1 ) continue;
 
 	console.log("=> Sending Email to=> %s:%s", membersName, membersEmail);
 
-	html = html.replace("_____members_name_goes_here_____", membersName);
+	let formattedHtml = html.replace("_____members_name_goes_here_____", membersName);
 	var mailOptions = {
 		from : `"${name}" <${sendingEmail}>`,
 		to : membersEmail,
 		subject : mailSubject,
-		html : html,
+		html : formattedHtml,
 		attachments : [{
 			filename : 'devfest19.png',
 			path : 'devfest/devfest-email/images/devfest19.png',
