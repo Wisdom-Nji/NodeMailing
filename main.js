@@ -21,7 +21,7 @@ for( let i=0;i<process.argv.length;++i ) {
 
 	else if( arg == "--mailing_list") {
 		receivingEmails = fs.readFileSync( process.argv[i+1] ).toString();
-		receivingEmails.split('\n');
+		receivingEmails = receivingEmails.split('\n');
 		++i;
 	}
 }
@@ -53,6 +53,7 @@ var transporter = nodemailer.createTransport({
 
 
 for( let i in receivingEmails ) {
+	if( receivingEmails.length < 1) continue;
 	var memberDetails = receivingEmails[i].split(':');
 	var membersName = memberDetails[0];
 	var membersEmail = memberDetails[1];
