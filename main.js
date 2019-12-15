@@ -31,7 +31,6 @@ for( let i=0;i<process.argv.length;++i ) {
 var html = fs.readFileSync('devfest/devfest-email/index.html').toString(); //TODO: change this to file, so any HTML template can be dynamically added and changed
 
 //custom code
-//html.replace("_____members_name_goes_here_____", membersName);
 
 console.log(sendingEmail);
 console.log(sendingEmailPassword);
@@ -39,6 +38,7 @@ console.log(mailingServer);
 console.log(receivingEmails);
 console.log(mailSubject);
 console.log(name);
+console.log();
 
 var transporter = nodemailer.createTransport({
 	host: mailingServer,
@@ -52,32 +52,43 @@ var transporter = nodemailer.createTransport({
 });
 
 
-var mailOptions = {
-	from : `"${name}" <${sendingEmail}>`,
-	to : receivingEmails,
-	subject : mailSubject,
-	html : html,
-	attachments : [{
-		filename : 'devfest19.png',
-		path : 'devfest/devfest-email/images/devfest19.png',
-		cid : sendingEmail + "_devfest19.png"
-	},
-	{
-		filename : 'gdc.png',
-		path : 'devfest/devfest-email/images/gdc.png',
-		cid : sendingEmail + "_gdc.png"
-	}]
-};
+for( let i in receivingEmails ) {
+	var memberDetails = receivingEmails[i].split(':');
+	var membersName = memberDetails[0];
+	var membersEmail = memberDetails[1];
+	
+	if( membersEmail.length < 1 ) continue;
+
+	console.log("=> Sending Email to=> %s:%s", membersName, membersEmail);
+
+	html.replace("_____members_name_goes_here_____", membersName);
+	var mailOptions = {
+		from : `"${name}" <${sendingEmail}>`,
+		to : membersEmail,
+		subject : mailSubject,
+		html : html,
+		attachments : [{
+			filename : 'devfest19.png',
+			path : 'devfest/devfest-email/images/devfest19.png',
+			cid : sendingEmail + "_devfest19.png"
+		},
+		{
+			filename : 'gdc.png',
+			path : 'devfest/devfest-email/images/gdc.png',
+			cid : sendingEmail + "_gdc.png"
+		}]
+	};
 
 
-/*
-transporter.sendMail( mailOptions, function(error, info) {
-	if( error) {
-		console.log( error );
-	}
-	else {
-		console.log("Email sent: " + info.response);
-	}
-});
+	/*
+	transporter.sendMail( mailOptions, function(error, info) {
+		if( error) {
+			console.log( error );
+		}
+		else {
+			console.log("Email sent: " + info.response);
+		}
+	});
 
-*/
+	*/
+}
