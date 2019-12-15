@@ -1,0 +1,2 @@
+- If using gmail server, generate an app password and use in credentials.env
+- *bug*: fix credentails.env to = instead of :
