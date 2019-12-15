@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
-
+const path = 'credentials.env";
+require('dotenv').config({path: path.toString()})
 
 var sendingEmail = "sample_sending_email@gmail.com";
 var sendingEmailPassword = "sendingEmailPassword";
