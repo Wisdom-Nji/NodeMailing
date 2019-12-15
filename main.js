@@ -4,7 +4,8 @@ require('dotenv').config({path: path.toString()})
 
 var sendingEmail = process.env.EMAIL;
 var sendingEmailPassword = process.env.PASSWORD;
-var receivingEmail = "wisdomnji@gmail.com"; //TODO: Move this to a file read into a map <name:email>
+var mailingServer = process.env.MAILSERVER;
+var receivingEmails = "wisdomnji@gmail.com"; //TODO: Move this to a file read into a map <name:email>
 var mailSubject = "Learning NodejsMailer"; //TODO: Pass this as argument
 var text = "Hello world"; //TODO: Move this to a file read into an an array
 
